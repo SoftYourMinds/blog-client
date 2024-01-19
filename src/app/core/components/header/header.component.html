@@ -1,4 +1,25 @@
 <mat-toolbar color="primary">
-    <span>My Application</span>
-</mat-toolbar>
+    <div class="wrap">
+        <span [style.fontStyle]="'italic'"
+            [routerLink]="['/blog']" >web.developing.blog</span>
     
+        @if (isAuthor) {
+            <div class="actions">   
+                <span>{{author.email}}</span>
+                <button mat-stroked-button 
+                    (click)="logout()">Logout</button>
+            </div>
+        }
+        @else {
+            <div class="actions">
+                <button mat-raised-button color="primary"
+                    (click)="openLoginDialog()">Login</button>
+                <button mat-raised-button color="primary"
+                    (click)="openSignUpDialog()">SignUp</button>
+            </div>
+        }
+    </div>
+    
+    
+
+</mat-toolbar>

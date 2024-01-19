@@ -1,0 +1,36 @@
+<div class="login">
+    <app-title>
+        Sign up
+    </app-title>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <!-- Name -->
+    <mat-form-field>
+      <label for="name">Name:</label>
+      <input matInput type="text" id="name" formControlName="name">
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field>
+      <label for="email">Email:</label>
+      <input matInput type="email" id="email" formControlName="email">
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field>
+      <label for="password">Password:</label>
+      <input matInput type="password" id="password" formControlName="password">
+      <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+
+    <!-- Submit button -->
+    <button mat-raised-button (submit)="onSubmit()" type="submit" [disabled]="userForm.invalid">Submit</button>
+  </form>
+</div>
+
+@if (isLoading) {
+  <app-loader></app-loader>
+}

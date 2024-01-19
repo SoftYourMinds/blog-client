@@ -1,0 +1,30 @@
+mat-toolbar{
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    align-items: center;
+    width: 100dvw;
+}
+
+.wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    width: 100%;
+    max-width: 1200px;
+}
+
+
+.header__wrap {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

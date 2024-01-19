@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IArticle } from '../interfaces/IArticle';
 
 
@@ -9,6 +9,9 @@ import { IArticle } from '../interfaces/IArticle';
 })
 export class ArticleService {
   private _baseUrl: string = 'http://127.0.0.1:8000/api/articles';
+
+  private _articlesSubject = new BehaviorSubject<IArticle[]>([]);
+  public $articles: Observable<IArticle[]> = this._articlesSubject
 
   constructor(private http: HttpClient) { }
 
@@ -32,6 +35,18 @@ export class ArticleService {
     return this.http.post<IArticle[]>(this._baseUrl + "/by-name-tags", {title, tags});
   }
 
-  
+  public findArticlesByCategory(category: number): Observable<IArticle[]> {
+    return this.http.get<IArticle[]>(this._baseUrl + "/by-category/"+ category);
+  }
+
+
+  public setArticles(articles: IArticle[]) {
+    this._articlesSubject.next(articles);
+  }
+
+  public get articles(): IArticle[] {
+    return this._articlesSubject.getValue();
+  }
+
   
 }
