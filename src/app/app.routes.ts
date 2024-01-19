@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
-import { CoreComponent } from './core/core.component';
+import { MainComponent } from './main/main.component';
+
 
 export const routes: Routes = [
-    { path: 'blog', component: CoreComponent},
+    { path: 'blog', component: MainComponent},
     { path: '', pathMatch: 'full', redirectTo: 'blog' } 
 ];
-
-
-
