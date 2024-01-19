@@ -1,0 +1,29 @@
+mat-card {
+    width: 100%;
+    max-width: 800px;
+}
+
+
+mat-card-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+   .name {
+    color: black;
+   }
+}
+
+mat-card-title {
+    font-size: 2rem;
+    padding: 15px 0 !important;
+}
+
+mat-card-content {
+    p {
+        max-height: 2em;
+        overflow: hidden;
+        padding: 10px 0px;
+    }
+}
+

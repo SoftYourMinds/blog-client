@@ -1,12 +1,33 @@
-<div class="article">
-    <div class="article__subtitle">
-        
-        <span>22.11.3002 23:33</span>
+<mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>
+        <app-avatar [name]="article.author?.name || 'none'"></app-avatar>
+        <span class="name">{{article.author?.name}}</span>
+        <span class="date">{{article.updated_at | date:'short' }}</span>
+      </mat-card-subtitle>  
+      <mat-card-title>
+        {{ article.title }}
+      </mat-card-title>
+     
+    </mat-card-header>
 
-    </div>
+    <mat-card-content>
+      <mat-chip-set aria-label="tags">
+        <mat-chip color="accent">
+          Dog one
+        </mat-chip>
+      </mat-chip-set>
 
-    <app-title></app-title>
-</div>
+      <p>
+        {{article.content}}
+      </p>
+
+      <button mat-stroked-button color="primary">READ</button>
+      
+
+    </mat-card-content>
+
+</mat-card>
 
 
 
