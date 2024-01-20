@@ -1,14 +1,11 @@
 <mat-toolbar color="primary">
     <div class="wrap">
-        <span [style.fontStyle]="'italic'"
-            [routerLink]="['/blog']" >web.developing.blog</span>
+        <span [routerLink]="['/blog']">
+            web.developing.blog
+        </span>
     
         @if (isAuthor) {
             <div class="actions">   
-                <!-- <span [routerLink]="['/blog/author/', author.id]">
-                    {{author.email}}
-                </span> -->
-                <!-- [routerLink]="['/blog/author/']" -->
                 <button mat-flat-button 
                     (click)="linkToAuthorPage()">
                     {{author.email}}
