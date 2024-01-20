@@ -1,7 +1,8 @@
 <app-title>Categories</app-title>
 <div class="list">
     
-    @for (category of this.categories;track category.id) {
+
+    @for (category of this.categories; track category.id) {
         @defer{
             <button mat-button color="accent" [routerLink]="['/blog', category.id]">{{ category.name }}</button>
         }

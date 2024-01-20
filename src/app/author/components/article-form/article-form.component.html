@@ -1,0 +1,114 @@
+
+@if (isEdit) {
+  <div class="heading-wrap">
+    <app-title>Edit Article</app-title> 
+    <div class="example-button-container">
+      <button mat-mini-fab color="accent"
+        (click)="backToCreateForm()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+  </div>
+} @else {
+  <app-title>
+    Create Article
+  </app-title> 
+}
+
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+    <!-- Title -->
+    <mat-form-field>
+      <label for="title">Title:</label>
+      <input matInput type="text" id="title" formControlName="title">
+    </mat-form-field>
+
+    <br>
+
+    <!-- Content -->
+    <mat-form-field>
+      <label for="content">Content:</label>
+      <textarea matInput rows="6" id="content" formControlName="content"></textarea>
+    </mat-form-field>
+
+    <br>
+
+    <!-- Category Select -->
+    <mat-form-field>
+      <label for="category">Category:</label>
+      <mat-select id="category" formControlName="category_id">
+        @for (category of categories; track category.id) {
+          <mat-option [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+
+    <!-- Tags -->
+    <mat-form-field class="example-form-field">
+      <mat-label>Tags</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Enter keywords" formControlName="tags">
+        @for (keyword of keywords; track keyword) {
+          <mat-chip-row (removed)="removeKeyword(keyword)">
+            {{keyword}}
+            <button matChipRemove aria-label="'remove ' + keyword">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        }
+      </mat-chip-grid>
+      <input placeholder="New keyword..."
+              [matChipInputFor]="chipGrid"
+              (matChipInputTokenEnd)="add($event)"/>
+    </mat-form-field>
+    
+    
+    <div class="image">
+      <label for="image">Image:</label>
+      <input  type="file" id="image" formControlName="image_path" (change)="onFileSelected($event)">
+    </div>
+      
+    <!-- Display the selected image (optional) -->
+    @if(articleForm.get('image_path')!.value) {
+      <img [src]="articleForm.get('image_path')!.value" alt="Selected Image" style="max-width: 100%;">
+    } @else {
+      <div class="image-placeholder">
+           <img src="https://cdn.iconscout.com/icon/free/png-256/free-gallery-211-1115303.png" alt="">   
+      </div>
+    }
+      <!-- Submit button -->
+      @if (isEdit) {
+        <div class="edit-actions">
+          <button 
+            mat-raised-button 
+            type="submit" [disabled]="articleForm.invalid"  
+            color="primary">
+              EDIT
+          </button>
+          <div class="example-button-container">
+            <button 
+                mat-mini-fab
+                type="button"
+                class="delete"
+                color="warn">
+              <mat-icon>delete</mat-icon>
+          </button>
+          </div>
+        </div>
+      } @else {
+        <button 
+          mat-raised-button 
+          type="submit" [disabled]="articleForm.invalid"  
+          color="primary">
+          CREATE
+        </button>
+      }
+
+    @if (isLoading) {
+      <app-loader></app-loader>
+    }
+    
+  </form>
+

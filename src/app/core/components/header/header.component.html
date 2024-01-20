@@ -5,7 +5,12 @@
     
         @if (isAuthor) {
             <div class="actions">   
-                <span>{{author.email}}</span>
+                <!-- <span [routerLink]="['/blog/author/', author.id]">
+                    {{author.email}}
+                </span> -->
+                <button mat-flat-button [routerLink]="['/blog/author/', author.id]">
+                    {{author.email}}
+                </button>
                 <button mat-stroked-button 
                     (click)="logout()">Logout</button>
             </div>

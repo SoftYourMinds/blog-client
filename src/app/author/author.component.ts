@@ -10,6 +10,8 @@ import { AuthorPageService } from './services/author-page.service';
 import { ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
 import { IAuthor } from '../core/interfaces/IAuthor';
 import { IArticle } from '../core/interfaces/IArticle';
+import { ArticleFormComponent } from './components/article-form/article-form.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-author',
@@ -19,7 +21,8 @@ import { IArticle } from '../core/interfaces/IArticle';
     UiModule,
     MaterialModule,
     HeaderComponent,
-    AuthorArticlesComponent
+    AuthorArticlesComponent,
+    ArticleFormComponent,
   ],
   providers: [
     AuthorPageService,
@@ -31,6 +34,7 @@ import { IArticle } from '../core/interfaces/IArticle';
 export class AuthorComponent {
     public articles: IArticle[] = [];
     public id: string | null = "";
+    public isLoading: boolean = false;
   
   constructor(
     private authorPageService: AuthorPageService,
@@ -38,18 +42,22 @@ export class AuthorComponent {
     private route: ActivatedRoute) {}
 
     ngOnInit(): void {
-      console.log(this.author);
         this.id = this.route.snapshot.paramMap.get('id');
         this.getArticlesByAuthor(Number(this.id) || 1);
     }
 
     getArticlesByAuthor(id: number) {
-      this.authorPageService.findArticlesByAuthor(+id).subscribe(
+      this.isLoading = true;
+      this.authorPageService.findArticlesByAuthor(+id).pipe(
+        take(1)
+      ).subscribe(
         (articles) => {
           this.articles = articles;
+          this.isLoading = false;
         }
       )
     }
+
 
     get author(): IAuthor {
       return this.authorService.author

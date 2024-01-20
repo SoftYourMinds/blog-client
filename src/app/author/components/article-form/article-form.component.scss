@@ -1,0 +1,67 @@
+form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+}
+
+form::ng-deep .mat-mdc-form-field {
+    min-width: 100%
+}
+
+.heading-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.image {
+    width: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 16px;
+    line-height: 14px;
+    gap: 10px;
+
+}
+
+.image-placeholder {
+    width: 100%;
+    border: 2px dashed gray;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img { 
+        scale: 0.5;  
+        opacity: 0.6;
+    }
+}
+
+button[type=submit] {
+    width: 100%;
+    padding: 40px;
+    flex: 1;
+    margin-top: 20px;
+}
+
+.edit-actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.delete {
+    margin-top: 20px;
+}
+
+

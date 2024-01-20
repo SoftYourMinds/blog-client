@@ -1,0 +1,26 @@
+:host {
+    width: 100dvw;
+}
+
+.main-wrap {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: start;
+    margin: 0 auto;
+    padding: 40px 5px;
+    gap: 40px;
+}
+
+.articles-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+    gap: 20px;
+    width: 60%;
+}
+
+app-article-form {
+    width: 40%;
+}
