@@ -32,36 +32,5 @@ import { take } from 'rxjs';
   styleUrl: './author.component.scss'
 })
 export class AuthorComponent {
-    public articles: IArticle[] = [];
-    public id: string | null = "";
-    public isLoading: boolean = false;
-  
-  constructor(
-    private authorPageService: AuthorPageService,
-    private authorService: AuthorService,
-    private route: ActivatedRoute) {}
-
-    ngOnInit(): void {
-        this.id = this.route.snapshot.paramMap.get('id');
-        this.getArticlesByAuthor(Number(this.id) || 1);
-    }
-
-    getArticlesByAuthor(id: number) {
-      this.isLoading = true;
-      this.authorPageService.findArticlesByAuthor(+id).pipe(
-        take(1)
-      ).subscribe(
-        (articles) => {
-          this.articles = articles;
-          this.isLoading = false;
-        }
-      )
-    }
-
-
-    get author(): IAuthor {
-      return this.authorService.author
-    }
-
-    
+     
 }

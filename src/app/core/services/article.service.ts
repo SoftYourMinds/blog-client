@@ -9,6 +9,9 @@ import { IArticle } from '../interfaces/IArticle';
 })
 export class ArticleService {
   private _baseUrl: string = 'http://127.0.0.1:8000/api/articles';
+  private _articleUrl: string = 'http://127.0.0.1:8000/api/article';
+
+
 
   private _articlesSubject = new BehaviorSubject<IArticle[]>([]);
   public $articles: Observable<IArticle[]> = this._articlesSubject
@@ -24,7 +27,11 @@ export class ArticleService {
   }
 
   public updateArticle(body: IArticle): Observable<IArticle> {
-    return this.http.put<IArticle>(this._baseUrl, body);
+    return this.http.put<IArticle>(this._baseUrl+"/update", body);
+  }
+
+  public createArticle(body: IArticle): Observable<IArticle> {
+    return this.http.post<IArticle>(this._baseUrl, body);
   }
 
   public deleteArticle(id: number): Observable<string> {

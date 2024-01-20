@@ -9,7 +9,7 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthorService } from '../../services/author.service';
 import { IAuthor } from '../../interfaces/IAuthor';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -34,11 +34,16 @@ export class HeaderComponent {
 
   constructor(
     public dialog: MatDialog,
-    private authorService: AuthorService) {}
+    private authorService: AuthorService,
+    private router: Router) {}
 
     ngOnInit(): void {
       console.log(this.author);
       
+    }
+
+    linkToAuthorPage() {
+      this.router.navigate(['/author']);
     }
 
   openLoginDialog(): void {

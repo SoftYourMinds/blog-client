@@ -22,12 +22,28 @@ import { AuthorPageService } from '../../services/author-page.service';
   styleUrl: './author-articles.component.scss'
 })
 export class AuthorArticlesComponent {
-    @Input() articles: IArticle[] = [];
+    public articles: IArticle[] = [];
 
     displayedColumns: string[] = ['title', 'category', 'date', 'edit'];
 
-    constructor(private authorPageService: AuthorPageService) {
+    constructor(
+     private authorPageService: AuthorPageService,
+    ) {}
 
+    ngOnInit(): void {
+
+      this.authorPageService.getArticlesByAuthor();
+      this.initArticlesObserver();
+  
+
+    }
+
+    private initArticlesObserver(): void {
+        this.authorPageService.$articles.subscribe(
+          (articles) => {
+            this.articles = articles.reverse();
+          }
+        )
     }
 
     public sendArticleToEdit(id: number): void {
@@ -39,7 +55,6 @@ export class AuthorArticlesComponent {
       let article = this.articles.find(article => article.id === id);
       if(article) return article
       return {}
-      // return this.articles.find(article => article.id === id) || {}
     }
     
 

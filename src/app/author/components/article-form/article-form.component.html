@@ -18,7 +18,7 @@
   <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
     <!-- Title -->
     <mat-form-field>
-      <label for="title">Title:</label>
+      <label for="title">Title*:</label>
       <input matInput type="text" id="title" formControlName="title">
     </mat-form-field>
 
@@ -26,7 +26,7 @@
 
     <!-- Content -->
     <mat-form-field>
-      <label for="content">Content:</label>
+      <label for="content">Content*:</label>
       <textarea matInput rows="6" id="content" formControlName="content"></textarea>
     </mat-form-field>
 
@@ -34,7 +34,7 @@
 
     <!-- Category Select -->
     <mat-form-field>
-      <label for="category">Category:</label>
+      <label for="category">Category*:</label>
       <mat-select id="category" formControlName="category_id">
         @for (category of categories; track category.id) {
           <mat-option [value]="category.id">
@@ -65,14 +65,16 @@
     </mat-form-field>
     
     
-    <div class="image">
+    <mat-form-field>
       <label for="image">Image:</label>
-      <input  type="file" id="image" formControlName="image_path" (change)="onFileSelected($event)">
-    </div>
+      <input matInput type="url" id="image" formControlName="image_path" 
+        >
+    </mat-form-field>
+
       
     <!-- Display the selected image (optional) -->
-    @if(articleForm.get('image_path')!.value) {
-      <img [src]="articleForm.get('image_path')!.value" alt="Selected Image" style="max-width: 100%;">
+    @if(image_path) {
+      <img [src]="image_path" alt="Selected Image" style="max-width: 100%;">
     } @else {
       <div class="image-placeholder">
            <img src="https://cdn.iconscout.com/icon/free/png-256/free-gallery-211-1115303.png" alt="">   
@@ -85,10 +87,11 @@
             mat-raised-button 
             type="submit" [disabled]="articleForm.invalid"  
             color="primary">
-              EDIT
+              SAVE
           </button>
           <div class="example-button-container">
             <button 
+                (click)="deleteArticle(article.id)"
                 mat-mini-fab
                 type="button"
                 class="delete"

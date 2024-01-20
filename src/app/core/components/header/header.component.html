@@ -8,7 +8,9 @@
                 <!-- <span [routerLink]="['/blog/author/', author.id]">
                     {{author.email}}
                 </span> -->
-                <button mat-flat-button [routerLink]="['/blog/author/', author.id]">
+                <!-- [routerLink]="['/blog/author/']" -->
+                <button mat-flat-button 
+                    (click)="linkToAuthorPage()">
                     {{author.email}}
                 </button>
                 <button mat-stroked-button 

@@ -2,19 +2,12 @@
 
 <div class="main-wrap">
     <div class="articles-wrap">
-        
         <app-title>Articles</app-title>
-        @if(articles.length === 0) {
-            Not exists yet
-        } @else {
-            <app-author-articles [articles]="articles"></app-author-articles>
-        }
+        <app-author-articles></app-author-articles>
     </div>
 
     <app-article-form></app-article-form>
-    @if (isLoading) {
-        <app-loader></app-loader>   
-    }
+
 </div>
 
 

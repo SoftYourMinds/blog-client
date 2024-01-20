@@ -43,6 +43,7 @@ export class MainComponent {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       let id = params.get('category');
+      console.log(id)
       if(id) {
         this.getArticlesByCategory(+id);
       }
