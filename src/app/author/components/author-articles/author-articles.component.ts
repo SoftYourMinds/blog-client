@@ -4,6 +4,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { UiModule } from '../../../shared/ui/ui.module';
 import { IArticle } from '../../../core/interfaces/IArticle';
 import { AuthorPageService } from '../../services/author-page.service';
+import {  Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,8 @@ import { AuthorPageService } from '../../services/author-page.service';
     CommonModule,
     MaterialModule,
     UiModule,
-    DatePipe
+    DatePipe,
+    RouterLink,
   ],
   providers: [
     // AuthorPageService,
