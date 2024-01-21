@@ -10,15 +10,15 @@ import { IArticle } from '../interfaces/IArticle';
 export class ArticleService {
   private _baseUrl: string = 'http://127.0.0.1:8000/api/articles';
   private _articleUrl: string = 'http://127.0.0.1:8000/api/article';
-
-
+  
+  private _isLoading: boolean = false;
 
   private _articlesSubject = new BehaviorSubject<IArticle[]>([]);
   public $articles: Observable<IArticle[]> = this._articlesSubject
 
   constructor(private http: HttpClient) { }
 
-  public getArticlesAll(): Observable<IArticle[]> {
+  public getArticlesAllObserver(): Observable<IArticle[]> {
     return this.http.get<IArticle[]>(this._baseUrl);
   }
 
@@ -39,7 +39,9 @@ export class ArticleService {
   }
 
   public findArticlesByNameTags(title: string, tags: string[]): Observable<IArticle[]> {
-    return this.http.post<IArticle[]>(this._baseUrl + "/by-name-tags", {title, tags});
+    return this.http.post<IArticle[]>(this._baseUrl + "/by-name-tags", {
+      title: title, tags: tags
+    });
   }
 
   public findArticlesByCategory(category: number): Observable<IArticle[]> {
@@ -54,6 +56,29 @@ export class ArticleService {
   public get articles(): IArticle[] {
     return this._articlesSubject.getValue();
   }
+
+
+  public getArticlesAll(): void {
+    this.isArticlesLoading = true;
+    
+    this.getArticlesAllObserver()
+      .subscribe((articles) => {
+      
+        this.setArticles(articles);
+
+        this.isArticlesLoading = false;
+    })
+  }
+
+  set isArticlesLoading(state: boolean) {
+    this._isLoading = state;
+  }
+
+  get isArticlesLoading(): boolean  {
+    return this._isLoading;
+  }
+
+  
 
   
 }

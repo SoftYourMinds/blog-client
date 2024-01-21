@@ -1,22 +1,22 @@
 <app-header></app-header>
 <div class="main-wrap">
     <div class="articles-wrap">
+        
         @if(isLoading) {
             <app-loader></app-loader>
         }
-        <app-title>Articles</app-title>
+        <div class="search-wrap">
+            <app-title>Articles</app-title>
+            <app-search></app-search>
+        </div>
+        
         @if(articles.length === 0) {
             Not exists yet
         } @else {
             
             @for (article of this.articles;track article.id) {
-                @defer{
-                    <app-article [article]="article"></app-article>
-                }
-                @loading {
-                    Loading...
-                }
-            }
+                <app-article [article]="article"></app-article>
+            }  
         }
     </div>
     <app-side-nav></app-side-nav>

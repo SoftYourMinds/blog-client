@@ -34,7 +34,9 @@
     </mat-card-content>
 
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary">Read</button>
+      <button mat-raised-button color="primary"
+        [routerLink]="['/article/', article.id]">
+        Read</button>
     </mat-card-actions>
 
 </mat-card>

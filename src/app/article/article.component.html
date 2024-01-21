@@ -1,0 +1,13 @@
+<app-header></app-header>
+<div class="main-wrap">
+    <div class="articles-wrap">
+        @if(isLoading) {
+            <app-loader></app-loader>
+        }
+        <app-title> Article </app-title>
+        <app-article-card [article]="article"></app-article-card>
+    </div>
+    <!-- <app-side-nav></app-side-nav> -->
+</div>
+
+
