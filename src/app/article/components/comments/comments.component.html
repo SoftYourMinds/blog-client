@@ -1,0 +1,47 @@
+
+<div class="replies">
+    <div class="reply-input-wrap">
+        <mat-form-field class="reply">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput 
+                placeholder="Ex. It makes me feel..."
+                [formControl]="commentFormControl">
+            </textarea>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary"
+             [disabled]="!commentFormControl.valid"
+            (click)="createComment()">
+            COMMENT
+        </button>
+        <!-- <button mat-mini-fab color="accent"
+            [disabled]="!commentFormControl.valid"
+            (click)="createComment()">
+            <mat-icon>plus_one</mat-icon>
+        </button> -->
+
+    </div>
+
+    @if (isShowAttemptComment) {
+        <div class="attempt">
+            <app-comment [comment]="attemptComment"
+                [ngClass]="{'failed': isAttempFailed}"></app-comment>
+            
+            @if (isAttempFailed) {
+                <div class="close">
+                    <button mat-icon-button color="warn"
+                        (click)="closeFailedAttemptComment()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>    
+            }
+               
+        </div>
+    }
+
+    
+    @for (comment of comments; track $index) {
+        <app-comment [comment]="comment"></app-comment>
+    }
+
+</div>

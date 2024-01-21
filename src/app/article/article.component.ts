@@ -7,6 +7,9 @@ import { IArticle } from '../core/interfaces/IArticle';
 import { HeaderComponent } from '../core/components/header/header.component';
 import { UiModule } from '../shared/ui/ui.module';
 import { ArticleCardComponent } from './components/article-card/article-card.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { CommentsService } from '../core/services/comments.service';
+import { AuthorService } from '../core/services/author.service';
 
 @Component({
   selector: 'app-article',
@@ -17,9 +20,12 @@ import { ArticleCardComponent } from './components/article-card/article-card.com
     HeaderComponent,
     UiModule,
     ArticleCardComponent,
+    CommentsComponent
   ],
   providers: [
     ArticleService,
+    CommentsService,
+    AuthorService,
   ],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss'
@@ -32,14 +38,14 @@ export class ArticleComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private commentsService: CommentsService
   ) {}
 
   ngOnInit(): void {
     this.article_id = this.route.snapshot.paramMap.get('id') || '';
     console.log(this.article_id);
     
-
     this.isLoading = true;
     this.articleService.getArticleById(this.article_id).subscribe({
       next: (article) => {  
@@ -52,6 +58,8 @@ export class ArticleComponent {
         console.log(error.message);
       }
     });
+
+    this.commentsService.getCommentsAll(this.article_id);
   }
 
   
